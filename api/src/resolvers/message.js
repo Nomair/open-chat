@@ -1,6 +1,9 @@
 import { messageSchema } from "../schemas";
-import { Message } from "../models";
+import { Message, User } from "../models";
 import { isObjectId } from "../utils/functions";
+import pubsub from "../pubsub";
+
+const NEW_MESSAGE = "NEW_MESSAGE";
 
 export default {
   Query: {
@@ -10,7 +13,7 @@ export default {
     },
     getMessage: (root, { id }, { req }, info) => {
       isObjectId(id);
-      return User.findById(id);
+      return Message.findById(id);
     },
   },
   Mutation: {
@@ -19,12 +22,20 @@ export default {
       const { userId } = req.session;
 
       const message = await Message.create({ body: args.body, sender: userId });
+      pubsub.publish(NEW_MESSAGE, { getFeeds: message });
       return message;
     },
   },
+  Subscription: {
+    getFeeds: {
+      subscribe: () => pubsub.asyncIterator([NEW_MESSAGE]),
+    },
+  },
+
   Message: {
     sender: async (message, args, { req }, info) => {
-      return (await message.populate("sender").execPopulate()).sender;
+      try { return (await message.populate("sender").execPopulate()).sender;}
+      catch { return User.findById(message.sender);}
     },
   },
 };

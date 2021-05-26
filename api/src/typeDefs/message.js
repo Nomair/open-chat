@@ -10,6 +10,10 @@ export default gql`
     sendMessage(body: String!): Message @auth
   }
 
+  extend type Subscription {
+    getFeeds: Message! @auth
+  }
+
   type Message {
     id: ID!
     body: String!

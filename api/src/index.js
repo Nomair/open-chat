@@ -1,64 +1,33 @@
-import { ApolloServer } from "apollo-server-express";
-import express from "express";
 import session from "express-session";
+import Redis from "ioredis";
 import connectRedis from "connect-redis";
-import resolvers from "./resolvers";
-import typeDefs from "./typeDefs";
-import schemaDirectives from "./directives";
 import mongoose from "mongoose";
-import {
-  IS_PROD,
-  DB_URI,
-  DB_OPTIONS,
-  REDIS_OPTIONS,
-  API_PORT,
-  SESS_OPTIONS,
-  SESS_NAME,
-  SESS_SECRET,
-  SESS_LIFETIME,
-} from "./config";
+import http from "http";
+import createApp from "./app";
+import { DB_URI, DB_OPTIONS, REDIS_OPTIONS, API_PORT } from "./config";
 
 (async () => {
   try {
     await mongoose.connect(DB_URI, DB_OPTIONS);
 
-    const app = express();
-    app.disable("x-powered-by");
     const RedisStore = connectRedis(session);
-    // const store = new RedisStore({ client: new Redis(REDIS_OPTIONS) });
+    const store = new RedisStore({ client: new Redis(REDIS_OPTIONS) });
+    const { app, server } = createApp(store);
 
-    const store = new RedisStore({ REDIS_OPTIONS });
+    // app.disable("x-powered-by");
 
-    app.use(
-      session({
-        store,
-        name: SESS_NAME,
-        secret: SESS_SECRET,
-        resave: true,
-        rolling: true,
-        saveUninitialized: false,
-        cookie: {
-          maxAge: parseInt(SESS_LIFETIME),
-          sameSite: true,
-          secure: IS_PROD,
-        },
-      })
+    const httpServer = http.createServer(app);
+    server.installSubscriptionHandlers(httpServer);
+
+    await new Promise((resolve) => httpServer.listen(API_PORT, resolve));
+
+    console.log(
+      `🚀 Server ready at http://localhost:${API_PORT}${server.graphqlPath}`
     );
-    const server = new ApolloServer({
-      typeDefs,
-      resolvers,
-      schemaDirectives,
-      playground: !IS_PROD,
-      context: ({ req, res }) => ({ req, res }),
-    });
-
-    server.applyMiddleware({ app });
-
-    app.listen({ port: API_PORT }, () => {
-      console.log(
-        `🚀 Server ready at http://localhost:${API_PORT}${server.graphqlPath}`
-      );
-    });
+    console.log(
+      `🚀 Subscriptions ready at ws://localhost:${API_PORT}${server.subscriptionsPath}`
+    );
+    return { server, app, httpServer };
   } catch (error) {
     console.log(error);
   }
