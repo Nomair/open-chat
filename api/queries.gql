@@ -1,0 +1,28 @@
+mutation {
+  logIn(username: "Alex", avatarUrl: "2") {
+    id
+  }
+}
+mutation {
+  logOut
+}
+
+{
+  currentUser {
+    id
+    username
+  }
+}
+
+{
+  users {
+    id
+  }
+}
+
+{
+  user(id: "60ac521714425937b835d600") {
+    username
+    avatarUrl
+  }
+}
