@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useMutation,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 // import { WebSocketLink } from "@apollo/client/link/ws";
 import { Container, Row, Col, FormInput, Button } from "shards-react";
 
@@ -16,11 +9,6 @@ import { Container, Row, Col, FormInput, Button } from "shards-react";
 //     reconnect: true,
 //   },
 // });
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  cache: new InMemoryCache(),
-});
 
 const GET_MESSAGES = gql`
   query {
@@ -46,10 +34,12 @@ const POST_MESSAGE = gql`
 
 const Messages = ({ user }) => {
   const { data } = useQuery(GET_MESSAGES);
+  console.log({user});
+  
   if (!data) return null;
   return (
     <>
-      {data.messages.map(({ sender: messageUser, body }) => (
+      {data.getMessages.map(({ sender: messageUser, body }) => (
         <div
           style={{
             display: "flex",
@@ -109,7 +99,7 @@ const Chat = () => {
   };
   return (
     <Container>
-      <Messages user={state.user} />
+      <Messages user="alex" />
       <Row>
         <Col xs={8}>
           <FormInput
@@ -136,11 +126,6 @@ const Chat = () => {
     </Container>
   );
 };
-export default () => (
-  <ApolloProvider client={client}>
-    <Chat />
-  </ApolloProvider>
-);
 
 function ExchangeRates() {
   const { loading, error, data } = useQuery(EXCHANGE_RATES);
@@ -156,3 +141,5 @@ function ExchangeRates() {
     </div>
   ));
 }
+
+export default Chat;
