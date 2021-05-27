@@ -25,32 +25,26 @@ const NEW_USER_STATUS = gql`
 `;
 
 const Chat = () => {
-  const [state, stateSet] = useState({ body: "" });
+  const [body, setBody] = useState("");
   const [postMessage] = useMutation(POST_MESSAGE);
   let usersStatusUpdte = useSubscription(NEW_USER_STATUS);
+
   if (usersStatusUpdte.data) {
-    console.log(usersStatusUpdte.data);
     if (usersStatusUpdte.data.getUsersStatusUpdate) {
       const users = usersStatusUpdte.data.getUsersStatusUpdate;
-      console.log(users.userStatus);
       if (users.userStatus == "LoggedIn")
         toast.success(`⭐ ${users.username} just joined the chat`);
-      else toast.info(` 😭 ${users.username} just left the chat`);
+      else toast.info(`😭 ${users.username} just left the chat`);
       usersStatusUpdte.data.getUsersStatusUpdate = null;
     }
   }
 
-  let b = userName();
-  console.log(b);
+  let LoggedUserName = userName();
   const onSend = () => {
-    if (state.body.length > 0) {
-      postMessage({
-        variables: state,
-      });
+    if (body.length > 0) {
+      postMessage({ variables: { body } });
     }
-    stateSet({
-      body: "",
-    });
+    setBody("");
   };
   return (
     <Container>
@@ -63,12 +57,8 @@ const Chat = () => {
           <FormInput
             size="lg"
             label="Message"
-            value={state.body}
-            onChange={(evt) =>
-              stateSet({
-                body: evt.target.value,
-              })
-            }
+            value={body}
+            onChange={(evt) => setBody(evt.target.value)}
             onKeyUp={(evt) => {
               if (evt.keyCode === 13) {
                 onSend();
