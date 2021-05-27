@@ -1,7 +1,7 @@
-export * from './auth'
+export * from "./auth";
 
-export * from './errors'
+export * from "./errors";
 
-export * from './layouts'
+export * from "./layouts";
 
-export { default as Home } from './Chat'
+export { default as Home } from "./chat/Chat";

@@ -13,6 +13,9 @@ export default gql`
     logIn(username: String!, avatarUrl: String): User
     logOut: Boolean @auth
   }
+  extend type Subscription {
+    getUsersStatusUpdate: UsersStatusUpdate! @auth
+  }
 
   type User {
     id: ID!
@@ -20,5 +23,11 @@ export default gql`
     avatarUrl: String
     messages: [Message!]!
     createdAt: String!
+  }
+
+  type UsersStatusUpdate {
+    id: ID!
+    username: String!
+    userStatus: String!
   }
 `;

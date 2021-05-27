@@ -4,7 +4,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { useInput } from "../../hooks";
 import { useHistory } from "react-router-dom";
 import { rememberLogin } from "../../auth";
-import { Form, FormGroup, FormInput, Button } from "shards-react";
+import { Form, FormGroup, FormInput, Button, Container } from "shards-react";
+import "./Login.css";
 const LOG_IN = gql`
   mutation logIn($username: String!, $avatarUrl: String) {
     logIn(username: $username, avatarUrl: $avatarUrl) {
@@ -22,28 +23,32 @@ const Login = (props) => {
     },
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     await logIn();
     rememberLogin();
     history.push("/home");
   };
 
   return (
-    <Form>
-      <FormGroup>
-        <label htmlFor="username">Username</label>
-        <FormInput
-          {...username}
-          id="username"
-          placeholder="Username"
-          required
-        />
-      </FormGroup>
-      <Button onClick={(e) => handleSubmit(e)} style={{ width: "100%" }}>
-        LogIn
-      </Button>
-    </Form>
+    <Container>
+      <Form className="login-form">
+        <FormGroup>
+          <FormInput
+            {...username}
+            id="username"
+            placeholder="Username"
+            required
+          />
+        </FormGroup>
+        <Button
+          className="send-button"
+          onClick={() => handleSubmit()}
+          style={{ width: "100%" }}
+        >
+          <span>Let's talk</span>
+        </Button>
+      </Form>
+    </Container>
   );
 };
 export default Login;

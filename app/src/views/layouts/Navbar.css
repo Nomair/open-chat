@@ -1,0 +1,12 @@
+.chat-header {
+  align-items: center;
+  background-color: #00b8d894;
+  width: 100%;
+  height: 7vh;
+  height: calc(var(--vh, 1vh) * 7) !important;
+  overflow: hidden;
+  top: 0px;
+}
+.xx-large {
+  font-size: xx-large;
+}

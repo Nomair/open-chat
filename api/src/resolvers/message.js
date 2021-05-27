@@ -34,8 +34,11 @@ export default {
 
   Message: {
     sender: async (message, args, { req }, info) => {
-      try { return (await message.populate("sender").execPopulate()).sender;}
-      catch { return User.findById(message.sender);}
+      try {
+        return (await message.populate("sender").execPopulate()).sender;
+      } catch {
+        return User.findById(message.sender);
+      }
     },
   },
 };

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, NavItem, NavLink } from "shards-react";
 import { useMutation, gql } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { forgetLogin } from "../../auth";
+import { forgetLogin, isLoggedIn } from "../../auth";
+import "./Navbar.css";
+
+// Similar to componentDidMount and componentDidUpdate:
+
 const LOG_OUT = gql`
   mutation {
     logOut
@@ -10,6 +14,10 @@ const LOG_OUT = gql`
 `;
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    setLoggedIn(isLoggedIn());
+  });
   const [logOut] = useMutation(LOG_OUT);
   let history = useHistory();
   const handleLogout = async () => {
@@ -20,17 +28,23 @@ const Navbar = () => {
 
   return (
     <>
-      <Nav>
+      <Nav className="chat-header">
         <NavItem>
-          <NavLink disabled href="#">
+          <NavLink className="xx-large" disabled href="#">
             Chat
           </NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink href="#" onClick={() => handleLogout()}>
-            Exit
-          </NavLink>
-        </NavItem>
+        {loggedIn && (
+          <NavItem>
+            <NavLink
+              className="xx-large"
+              href="#"
+              onClick={() => handleLogout()}
+            >
+              Exit
+            </NavLink>
+          </NavItem>
+        )}
       </Nav>
     </>
   );

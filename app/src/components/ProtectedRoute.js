@@ -34,5 +34,5 @@ export const PrivateRoute = props => /*#__PURE__*/_jsx(ProtectedRoute, { ...prop
 });
 export const PublicRoute = props => /*#__PURE__*/_jsx(ProtectedRoute, { ...props,
   allowed: !isLoggedIn(),
-  redirectTo: "/login"
+  redirectTo: "/home"
 });

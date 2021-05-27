@@ -1,0 +1,12 @@
+.login-form {
+  margin-top: 30px;
+}
+
+.send-button {
+  background-color: #00b8d894 !important;
+  border-color: #00b8d894 !important;
+}
+
+.send-button span {
+  font-size: x-large;
+}

@@ -14,7 +14,6 @@ import { DB_URI, DB_OPTIONS, REDIS_OPTIONS, API_PORT } from "./config";
     const store = new RedisStore({ client: new Redis(REDIS_OPTIONS) });
     const { app, server } = createApp(store);
 
-    // app.disable("x-powered-by");
 
     const httpServer = http.createServer(app);
     server.installSubscriptionHandlers(httpServer);
