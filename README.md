@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://bitbucket.org/nomair/open-chat/src/master/">
+  <a href="https://github.com/Nomair/open-chat/tree/master">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -15,10 +15,10 @@
   <p align="center">
     An open chat room where users can send and receive messages in real-time!
     <br />
-    <a href="https://bitbucket.org/nomair/open-chat/src/master/"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Nomair/open-chat/blob/master/images/demo.gif"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://bitbucket.org/nomair/open-chat/src/master/images/demo.gif">View Demo</a>
+    <a href="https://github.com/Nomair/open-chat/blob/master/images/demo.gif">View Demo</a>
    
 </p>
 
@@ -43,9 +43,12 @@
       </ul>
     </li>
     <li><a href="#usage">Try it!</a></li>
+     <li><a href="#graphql">GraphQL Queries, Mutations, and Subscription</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license"> License</a></li>
     <li><a href="#contact">Contact</a></li>
+   
+
 
   </ol>
 </details>
@@ -57,7 +60,7 @@
 
 ![Product Name Screen Shot][product-screenshot]
 
-An open chat room without registration;  to join the room, the user needs to enter an identification (nickname); When entering the Chat room, the list of messages already sent in this room is being displayed in increasing order; During the conversation, the user can view new messages sent and also be alerted when another user enters/or leaves the Chat; The user can leave the chat at any time, through a logoff button. When exiting the application without logging off, the user remains logged on and able to send messages when he returns to the application;
+An open chat room without registration;  to join the room, the user needs to enter an identification (nickname); When entering the Chat room, the list of messages already sent in this room is displayed in ascending order; during the conversation, the user can view new messages sent and also be alerted when another user enters or leaves the Chat; the user can leave the chat at any time, through an Exit button. If the user closes the browser/tab without hitting the  Exit button his session will be active for 24 hours where he can rejoin the chat before the session got expired.
 
 
 ### Main Points
@@ -93,13 +96,13 @@ Make sure to have npm installed
 
 1. Clone the repo
    ```sh
-   git clone https://bitbucket.org/nomair/open-chat.git
+   git clone https://github.com/Nomair/open-chat.git
    ```
-2. Install NPM packages in both [API](https://bitbucket.org/nomair/open-chat/src/master/api/) and [APP](https://bitbucket.org/nomair/open-chat/src/master/app/) directories 
+2. Install NPM packages in both [API](https://github.com/Nomair/open-chat/tree/main/api) and [APP](https://github.com/Nomair/open-chat/tree/main/app) directories 
    ```sh
    npm install
    ```
-3. Enter your configurations in [Config.js](https://bitbucket.org/nomair/open-chat/src/master/api/src/config.js)
+3. Enter your configurations in [Config.js](https://github.com/Nomair/open-chat/blob/main/api/src/config.js)
   
 
 
@@ -107,15 +110,19 @@ Make sure to have npm installed
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Run the Server in [API](https://bitbucket.org/nomair/open-chat/src/master/api/) directory
+1. Run the Server in [API](https://github.com/Nomair/open-chat/tree/main/api) directory
    ```sh
      npm start
    ```
-1. Run the Client Side in [APP](https://bitbucket.org/nomair/open-chat/src/master/app/) directory
+2. Run the Client Side in [APP](https://github.com/Nomair/open-chat/tree/main/app) directory
    ```sh
    npm start
    ```
+   
+<!-- CONTRIBUTING -->
+## GraphQL
 
+  You can find the used GraphQL quries in [queries.gql](https://github.com/Nomair/open-chat/blob/main/api/queries.gql)
 <!-- CONTRIBUTING -->
 ## Contributing
 
