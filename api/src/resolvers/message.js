@@ -8,7 +8,6 @@ const NEW_MESSAGE = "NEW_MESSAGE";
 export default {
   Query: {
     getMessages: (root, arg, { req }, info) => {
-      //TODO paginiation
       return Message.find({});
     },
     getMessage: (root, { id }, { req }, info) => {
@@ -18,10 +17,12 @@ export default {
   },
   Mutation: {
     sendMessage: async (root, args, { req }, info) => {
+      // abortEarly false to show all the failures not just the first one
       await messageSchema.validateAsync(args, { abortEarly: false });
-      const { userId } = req.session;
 
+      const { userId } = req.session;
       const message = await Message.create({ body: args.body, sender: userId });
+      // Add the new message to the subscription channel
       pubsub.publish(NEW_MESSAGE, { getFeeds: message });
       return message;
     },
@@ -34,6 +35,7 @@ export default {
 
   Message: {
     sender: async (message, args, { req }, info) => {
+      // the point here is to deal with message sender as an object of type User
       try {
         return (await message.populate("sender").execPopulate()).sender;
       } catch {

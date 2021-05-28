@@ -29,11 +29,9 @@ const createApp = (store) => {
         const req = await new Promise((resolve) => {
           sessionHandler(request, {}, () => {
             checkLoggedIn(request);
-
             resolve(request);
           });
         });
-
         return { req };
       },
     },

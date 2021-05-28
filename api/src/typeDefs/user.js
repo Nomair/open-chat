@@ -1,14 +1,15 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-
   extend type Query {
+    # these quiries are extra just for test purposes.
     currentUser: User @auth
     users: [User!]! @auth
     user(id: ID!): User @auth
   }
 
   extend type Mutation {
+    # register is an extra mutations just for test purposes.
     register(username: String!, avatarUrl: String): User @guest
     logIn(username: String!, avatarUrl: String): User
     logOut: Boolean @auth

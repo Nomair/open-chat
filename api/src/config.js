@@ -16,7 +16,7 @@ export const {
 
   REDIS_HOST = "localhost",
   REDIS_PORT = 6379,
-  // REDIS_PASSWORD = "secret",
+  // REDIS_PASSWORD = "####",
 } = process.env;
 
 export const IS_PROD = ENV === "production";
@@ -32,14 +32,12 @@ export const REDIS_OPTIONS = {
   host: REDIS_HOST,
   port: +REDIS_PORT,
   // password: REDIS_PASSWORD,
-  // TODO: retry_strategy
 };
 
 export const SESS_OPTIONS = {
   name: SESS_NAME,
   secret: SESS_SECRET,
   resave: false,
-  // rolling: true,
   saveUninitialized: false,
   cookie: {
     maxAge: +SESS_LIFETIME,
@@ -54,6 +52,7 @@ export const APOLLO_OPTIONS = {
     : {
         settings: {
           "request.credentials": "include",
+          //TODO handle CORS
         },
       },
 };
