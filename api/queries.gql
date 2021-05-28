@@ -1,13 +1,33 @@
+###################### User ######################
+# I created some extra mutations and query just for test purposes.
+
+##### Mutations
 mutation {
-  logIn(username: "Alex", avatarUrl: "2") {
+  logIn(username: "Alex") {
     id
   }
 }
+
+# avatarUrl: I was planning to enable make the user to upload images, but I gout short in time, I left it as an optional choice for later!
+mutation {
+  logIn(username: "Nomair", avatarUrl: "2") {
+    id
+  }
+}
+
+mutation {
+  register(username: "test123") {
+    id
+  }
+}
+
 mutation {
   logOut
 }
 
 {
+  ##### Queries
+
   currentUser {
     id
     username
@@ -17,12 +37,74 @@ mutation {
 {
   users {
     id
+    username
+    createdAt
+    avatarUrl
   }
 }
 
 {
-  user(id: "60ac521714425937b835d600") {
+  user(id: "##########") {
     username
     avatarUrl
+  }
+}
+
+##### subscription
+# check whom is Logging in or out
+subscription {
+  getUsersStatusUpdate {
+    id
+    username
+    userStatus
+  }
+}
+
+###################### Messages ######################
+
+##### Mutations
+
+mutation {
+  sendMessage(body: "Hello, welcome to the CHAT!!") {
+    id
+    body
+  }
+}
+
+##### Queries
+query {
+  getMessages {
+    id
+    body
+    sender {
+      id
+      username
+    }
+    createdAt
+  }
+}
+
+query {
+  getMessage(id: "##########") {
+    body
+    id
+    sender {
+      id
+      username
+    }
+  }
+}
+
+##### subscription
+# messages listner
+
+subscription {
+  getFeeds {
+    body
+    createdAt
+    sender {
+      id
+      username
+    }
   }
 }

@@ -26,7 +26,7 @@ const Login = (props) => {
   const handleSubmit = async () => {
     await logIn();
     rememberLogin(username.value);
-    history.push("/home");
+    history.go(0);
   };
 
   return (

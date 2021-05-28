@@ -5,8 +5,6 @@ import { useHistory } from "react-router-dom";
 import { forgetLogin, isLoggedIn, getUserName } from "../../auth";
 import "./Navbar.css";
 
-// Similar to componentDidMount and componentDidUpdate:
-
 const LOG_OUT = gql`
   mutation {
     logOut
