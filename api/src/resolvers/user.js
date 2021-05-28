@@ -24,6 +24,7 @@ export default {
       await registerLoginSchema.validateAsync(args, { abortEarly: false });
       const user = await User.create(args);
       req.session.userId = user.id;
+      req.session.username = user.username;
       return user;
     },
 

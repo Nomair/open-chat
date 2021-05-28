@@ -14,3 +14,10 @@
   border-radius: 1em;
   max-width: 60%;
 }
+
+.message-datetime {
+  font-size: xx-small;
+}
+.message-text {
+ font-size: large; 
+}

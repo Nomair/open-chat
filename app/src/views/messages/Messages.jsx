@@ -1,6 +1,9 @@
 import React from "react";
 import { useQuery, useSubscription, gql } from "@apollo/client";
 import "./Messages.css";
+import Moment from "react-moment";
+
+var now = new Date();
 
 const GET_MESSAGES = gql`
   query {
@@ -34,14 +37,17 @@ const Messages = ({ user }) => {
 
   let feed = useSubscription(GET_FEEDS);
   if (feed.data) {
-    if (feed.data.getFeeds) data.getMessages.push(feed.data.getFeeds);
+    if (feed.data.getFeeds) {
+      feed.data.getFeeds.createdAt = Date.parse(feed.data.getFeeds.createdAt);
+      data.getMessages.push(feed.data.getFeeds);
+    }
     feed.data.getFeeds = null;
   }
 
   if (!data) return null;
   return (
     <>
-      {data.getMessages.map(({ sender: messageUser, body }) => (
+      {data.getMessages.map(({ sender: messageUser, body, createdAt }) => (
         <div
           style={{
             display: "flex",
@@ -63,7 +69,12 @@ const Messages = ({ user }) => {
               color: user === messageUser.username ? "white" : "black",
             }}
           >
-            {body}
+            <div className="message-text">{body}</div>
+            <span className="message-datetime">
+              <Moment format="YYYY-MM-DD HH:mm">
+                {new Date(JSON.parse(createdAt))}
+              </Moment>
+            </span>
           </div>
         </div>
       ))}
