@@ -17,7 +17,8 @@ export default gql`
   extend type Subscription {
     getUsersStatusUpdate: UsersStatusUpdate! @auth
   }
-
+  # The Backend is ready to receive  the user profile picture URL,
+  #  but it's not mandatory because its not implemented in the Frontend.
   type User {
     id: ID!
     username: String!
