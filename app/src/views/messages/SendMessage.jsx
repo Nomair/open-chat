@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, FormInput, Button } from "shards-react";
+import { Row, Col, FormInput, Button } from "shards-react";
 import { useMutation, gql } from "@apollo/client";
 
 const POST_MESSAGE = gql`
@@ -26,6 +26,7 @@ const SendMessage = () => {
         <FormInput
           size="lg"
           label="Message"
+          placeholder="Press Enter to send!"
           value={body}
           onChange={(evt) => setBody(evt.target.value)}
           onKeyUp={(evt) => {

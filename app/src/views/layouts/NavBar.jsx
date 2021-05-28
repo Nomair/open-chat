@@ -48,7 +48,7 @@ const Navbar = () => {
             </NavLink>
           </NavItem>
         )}
-        <span className="user-welcome">Welcome {username} ⭐</span>
+        <span className="user-welcome">Welcome {username} 👋</span>
       </Nav>
     </>
   );
