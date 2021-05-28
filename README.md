@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Nomair/open-chat/tree/master">
+  <a href="https://github.com/Nomair/open-chat/tree/main">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -15,10 +15,10 @@
   <p align="center">
     An open chat room where users can send and receive messages in real-time!
     <br />
-    <a href="https://github.com/Nomair/open-chat/blob/master/images/demo.gif"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Nomair/open-chat/blob/main/images/demo.gif"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Nomair/open-chat/blob/master/images/demo.gif">View Demo</a>
+    <a href="https://github.com/Nomair/open-chat/blob/main/images/demo.gif">View Demo</a>
    
 </p>
 
@@ -148,7 +148,7 @@ Distributed under the MIT License.
 
 Nomair Ghanem  - nominaw@gmail.com
 
-Project Link: [https://bitbucket.org/nomair/open-chat/](https://bitbucket.org/nomair/open-chat/)
+Project Link: [https://github.com/Nomair/open-chat](https://github.com/Nomair/open-chat)
 
 
 
